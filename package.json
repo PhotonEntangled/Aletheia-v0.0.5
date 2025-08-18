@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@ahdev/dokploy-mcp": "^1.4.0",
+    "enhanced-n8n-mcp-server": "^4.0.5",
+    "hostinger-api-mcp": "^0.0.31",
+    "n8n-mcp": "^2.10.4",
+    "task-master-ai": "^0.24.0"
+  }
+}

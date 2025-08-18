@@ -1,0 +1,55 @@
+Here’s a simple HTML file with a button that displays “BingBong you just got BingBonged” when clicked:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BingBong Button</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="bingBongButton">Click Me for BingBong!</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('bingBongButton').addEventListener('click', function() {
+            document.getElementById('message').textContent = 'BingBong you just got BingBonged!';
+        });
+    </script>
+</body>
+</html>

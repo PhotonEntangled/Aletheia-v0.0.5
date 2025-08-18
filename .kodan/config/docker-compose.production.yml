@@ -1,0 +1,102 @@
+services:
+  database:
+    image: docker.io/pgvector/pgvector:pg15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - khoj_db:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - kodan_network
+
+  sandbox:
+    image: ghcr.io/khoj-ai/terrarium:latest
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 2
+    restart: unless-stopped
+    networks:
+      - kodan_network
+
+  search:
+    image: docker.io/searxng/searxng:latest
+    volumes:
+      - khoj_search:/etc/searxng
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8080/
+    restart: unless-stopped
+    networks:
+      - kodan_network
+
+  server:
+    depends_on:
+      database:
+        condition: service_healthy
+    image: ghcr.io/khoj-ai/khoj:2.0.0-beta.13
+    ports:
+      - "42110:42110"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    working_dir: /app
+    volumes:
+      - khoj_config:/root/.khoj/
+      - khoj_models:/root/.cache/torch/sentence_transformers
+      - khoj_models:/root/.cache/huggingface
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+      - KHOJ_DJANGO_SECRET_KEY=your-production-secret-key-change-this
+      - KHOJ_DEBUG=False
+      - KHOJ_ADMIN_EMAIL=zero@kodan.space
+      - KHOJ_ADMIN_PASSWORD=ChangeThisPassword123!
+      - KHOJ_NO_HTTPS=False
+      - KHOJ_DOMAIN=kodan.space
+      - OPENAI_BASE_URL=https://openrouter.ai/api/v1
+      - KHOJ_DEFAULT_CHAT_MODEL=google/gemini-2.5-pro-latest
+      - OPENAI_API_KEY=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
+      - JINA_API_KEY=jina_2f54a4afdbfa41f89ecabbad037dd2936I3ZEqEZWgB3MKy93_uAd9WqFuUC
+      - KHOJ_TELEMETRY_DISABLE=True
+      - KHOJ_TERRARIUM_URL=http://sandbox:8080
+      - KHOJ_SEARXNG_URL=http://search:8080
+    command: --host="0.0.0.0" --port=42110 -vv --non-interactive
+    restart: unless-stopped
+    networks:
+      - kodan_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.server.loadbalancer.server.port=42110"
+
+  n8n:
+    image: nginx:alpine
+    restart: unless-stopped
+    expose:
+      - "5678"
+    networks:
+      - kodan_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+    volumes:
+      - ../files/nginx-n8n.conf:/etc/nginx/nginx.conf
+
+networks:
+  kodan_network:
+    driver: bridge
+
+volumes:
+  khoj_config:
+  khoj_db:
+  khoj_models:
+  khoj_search:

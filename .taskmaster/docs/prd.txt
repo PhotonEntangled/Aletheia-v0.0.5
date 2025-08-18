@@ -1,0 +1,78 @@
+KODAN Task Master Integration PRD
+==================================
+
+Project: KODAN (Knowledge Omni-Directional Discovery And Navigation)
+Version: v2.0.0-beta.13
+Integration Target: Task Master MCP for Development Workflow
+
+OVERVIEW
+--------
+Integrate Task Master MCP (Model Control Protocol) server into KODAN to provide AI-driven task management capabilities for development workflow. This will enable intelligent task creation, research integration, and automation through Cursor IDE and n8n workflows.
+
+REQUIREMENTS
+------------
+
+1. MCP Server Integration
+   - Self-hosted Task Master MCP server running locally
+   - Integration with KODAN's existing API infrastructure 
+   - Support for OpenRouter and Jina API keys
+   - Compatible with Cursor IDE MCP protocol
+
+2. Development Workflow Enhancement
+   - Task creation and management via chat interface
+   - Kanban board visualization in Cursor IDE
+   - Integration with KODAN's research capabilities
+   - Automated task generation from PRDs
+
+3. Infrastructure Integration
+   - Docker container deployment on Hostinger VPS
+   - Integration with existing services (kodan.space, n8n.kodan.space)
+   - Telegram bot task management capabilities
+   - n8n workflow automation hooks
+
+4. Core Features
+   - Task parsing and generation from requirements
+   - Research-enhanced task planning
+   - Multi-model AI support (OpenRouter, OpenAI, Anthropic)
+   - Real-time task status updates
+   - Cross-platform compatibility (VS Code, Cursor, Windsurf)
+
+5. Infrastructure Troubleshooting (URGENT)
+   - Traefik reverse proxy routing issues
+   - Docker container networking diagnostics
+   - SSL certificate and Let's Encrypt configuration
+   - Port binding and service accessibility
+   - Dokploy integration with custom docker-compose
+
+SUCCESS CRITERIA
+----------------
+- Task Master MCP server responds to chat commands
+- Cursor IDE displays functional Kanban board
+- Tasks can be created, updated, and completed via chat
+- Integration with KODAN's existing research pipeline
+- Foundation ready for n8n automation workflows
+- URGENT: kodan.space and n8n.kodan.space are accessible via HTTPS
+- Traefik routing restored and functioning properly
+
+TECHNICAL STACK
+---------------
+- Node.js v22.18.0 for MCP server
+- MCP (Model Control Protocol) for IDE integration
+- OpenRouter API for AI capabilities
+- Docker for containerized deployment
+- Cursor IDE for development interface
+
+DELIVERABLES
+------------
+1. Functional MCP server in src/kodan/mcp/task_master/
+2. Updated .cursor/mcp.json configuration
+3. Initialized .taskmaster/ project structure
+4. Working task management via Cursor chat interface
+5. Documentation and setup guides
+
+CONSTRAINTS
+-----------
+- Must maintain compatibility with existing KODAN infrastructure
+- Should not interfere with current Khoj AI functionality
+- API keys must be properly secured
+- Performance should not impact main KODAN services

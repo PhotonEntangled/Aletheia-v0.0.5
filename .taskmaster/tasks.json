@@ -1,0 +1,53 @@
+[
+  {
+    "id": "task-001",
+    "title": "Complete Task Master MCP Integration",
+    "description": "Finalize the integration of Task Master MCP server into KODAN development workflow",
+    "status": "in_progress",
+    "priority": "high",
+    "tags": ["integration", "mcp", "development"],
+    "created_at": "2025-08-15T11:00:00Z",
+    "updated_at": "2025-08-15T11:15:00Z",
+    "subtasks": [
+      {
+        "id": "subtask-001-01",
+        "title": "Configure Cursor IDE MCP settings",
+        "status": "in_progress",
+        "description": "Enable task-master-ai in Cursor MCP settings panel"
+      },
+      {
+        "id": "subtask-001-02", 
+        "title": "Test task management via chat",
+        "status": "pending",
+        "description": "Verify task creation and management through Cursor chat interface"
+      }
+    ]
+  },
+  {
+    "id": "task-002",
+    "title": "Implement n8n Workflow Integration",
+    "description": "Create MCP bridge between KODAN and n8n for workflow automation",
+    "status": "pending",
+    "priority": "medium",
+    "tags": ["automation", "n8n", "integration"],
+    "created_at": "2025-08-15T11:00:00Z"
+  },
+  {
+    "id": "task-003",
+    "title": "Enhance Telegram Bot with Task Management",
+    "description": "Add Task Master capabilities to KODAN Telegram bot for remote task management",
+    "status": "pending", 
+    "priority": "medium",
+    "tags": ["telegram", "bot", "mobile"],
+    "created_at": "2025-08-15T11:00:00Z"
+  },
+  {
+    "id": "task-004",
+    "title": "Deploy MCP Server to VPS",
+    "description": "Set up Task Master MCP server on Hostinger VPS for always-available access",
+    "status": "pending",
+    "priority": "low",
+    "tags": ["deployment", "vps", "production"],
+    "created_at": "2025-08-15T11:00:00Z"
+  }
+]
