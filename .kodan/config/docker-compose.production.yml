@@ -41,7 +41,7 @@ services:
     depends_on:
       database:
         condition: service_healthy
-    image: ghcr.io/photonentangled/aletheia:0.0.5
+    image: ghcr.io/photonentangled/aletheia:0.0.6
     ports:
       - "42110:42110"
     extra_hosts:
