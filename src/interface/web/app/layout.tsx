@@ -6,38 +6,28 @@ import { ContentSecurityPolicy } from "./common/layoutHelper";
 import { ThemeProvider } from "./components/providers/themeProvider";
 
 export const metadata: Metadata = {
-    title: "Khoj AI - Ask Anything",
+    title: "Aletheia - Ask Anything",
     description:
-        "Khoj is a personal research assistant. It helps you understand better and create faster.",
+        "Aletheia is a personal knowledge assistant. It helps you understand better and create faster.",
     icons: {
-        icon: "/static/assets/icons/khoj_lantern.ico",
-        apple: "/static/assets/icons/khoj_lantern_256x256.png",
+        icon: "/static/favicon.ico",
+        apple: "/static/Aletheia_logo.svg",
     },
-    manifest: "/static/khoj.webmanifest",
+    manifest: "/static/aletheia.webmanifest",
     keywords:
-        "research assistant, productivity, AI, Khoj, open source, model agnostic, research, productivity tool, personal assistant, personal research assistant, personal productivity assistant",
+        "knowledge assistant, productivity, AI, Aletheia, open source, model agnostic, research, productivity tool, personal assistant, personal knowledge assistant, personal productivity assistant",
     openGraph: {
-        siteName: "Khoj AI",
-        title: "Khoj AI",
+        siteName: "Aletheia",
+        title: "Aletheia",
         description:
-            "Khoj is a personal research assistant. It helps you understand better and create faster.",
-        url: "https://app.khoj.dev",
+            "Aletheia is a personal knowledge assistant. It helps you understand better and create faster.",
+        url: "https://kodan.space",
         type: "website",
         images: [
             {
-                url: "https://assets.khoj.dev/khoj_hero.png",
-                width: 940,
-                height: 525,
-            },
-            {
-                url: "https://assets.khoj.dev/khoj_lantern_256x256.png",
+                url: "/static/Aletheia_logo.svg",
                 width: 256,
                 height: 256,
-            },
-            {
-                url: "https://assets.khoj.dev/khoj_lantern_logomarktype_1200x630.png",
-                width: 1200,
-                height: 630,
             },
         ],
     },

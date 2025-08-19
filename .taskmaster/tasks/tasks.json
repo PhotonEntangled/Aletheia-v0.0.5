@@ -136,11 +136,170 @@
         "dependencies": [],
         "priority": "medium",
         "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Set Up CI/CD Pipeline for Automated Build, Test, and Deployment",
+        "description": "Establish a CI/CD pipeline to automate the building of Docker images, running of tests, and deployment to the VPS. This will be triggered by a 'git push' to a designated branch, replacing the current manual deployment process.",
+        "details": "The primary goal is to create a fully automated workflow from code commit to deployment using a platform like GitHub Actions. The pipeline should be configured to trigger on a `git push` to the `main` or a new `deploy` branch. Key steps include: 1. Checking out the latest code. 2. Running linters and static analysis based on the rules from Task 9. 3. Building a new Docker image for the application. 4. Running the automated test suite against the new build. 5. If tests pass, pushing the Docker image to a container registry (e.g., GitHub Container Registry). 6. Securely connecting to the production VPS (from Task 4) to pull the new image and restart the service, likely via Dokploy webhooks or SSH commands. All credentials and keys must be stored as encrypted secrets in the CI/CD platform.",
+        "testStrategy": "1. Create a feature branch, make a minor code change, and open a pull request against the `main` branch. 2. Verify that the CI pipeline triggers, runs all checks and tests, but does not deploy. 3. Merge the pull request into `main`. 4. Confirm that this merge event triggers the full pipeline, including the deployment step. 5. Monitor the pipeline logs to ensure each stage completes successfully. 6. Access the live application URL and verify that the new change is active and functional. 7. Intentionally push a change that fails a test to confirm the pipeline fails and prevents deployment.",
+        "status": "pending",
+        "dependencies": [
+          4,
+          5,
+          8,
+          9
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Fix Broken UI Branding",
+        "description": "Diagnose and resolve the issue causing Aletheia brand logos to fail to load on the live server. This bug results in 404 errors for SVG assets and negatively impacts the user interface's branding.",
+        "details": "The primary goal is to identify why SVG logo assets are not being served correctly on the live environment. Start by using browser developer tools to inspect the network requests and confirm the exact paths that are returning 404 errors. Investigate the Next.js application's static file handling; verify that the logo assets are located in the `/public` directory. Review the application code to ensure the image source paths are correctly referenced (e.g., `/logo.svg`). Pay close attention to the `Dockerfile` to ensure the `public` directory is being correctly copied into the production image during the build process. A missing or incorrect `COPY ./public ./public` instruction is a likely culprit.",
+        "testStrategy": "1. After deploying the fix, perform a hard refresh (clearing cache) on the web application in a browser. 2. Visually confirm that the Aletheia logos now appear correctly in all expected locations in the UI. 3. Open the browser's developer tools, go to the 'Network' tab, and reload the page. 4. Filter the network requests for `.svg` files and verify that the logo assets now load with a `200 OK` status code. 5. Confirm that no 404 errors related to image or brand assets are present in the console or network log.",
+        "status": "pending",
+        "dependencies": [
+          4
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Fix Email Login Rate Limiting",
+        "description": "The server logs show the user is being immediately rate-limited ('429 Too Many Requests') when attempting to log in via email. This task is to correct the configuration to allow for a reasonable number of login attempts.",
+        "details": "Investigate the rate-limiting logic in `src/khoj/routers/helpers.py` and `src/khoj/routers/auth.py`. The current implementation incorrectly triggers a '429 Too Many Requests' error on the first login attempt. Analyze the rate-limiter's configuration (e.g., token bucket size, refill rate) and the key used to identify clients. Adjust the parameters to permit a reasonable number of login attempts (e.g., 5-10 attempts per minute) before enforcement. Ensure the rate-limiting is applied on a per-user or per-IP basis, not globally.",
+        "testStrategy": "1. Before applying the fix, write a test that replicates the bug: an initial login attempt should fail with a 429 status code. 2. After applying the fix, confirm the initial test now passes, allowing a successful login. 3. Write a new test to verify that multiple failed login attempts (e.g., with a wrong password) up to the new limit return a standard authentication error, not a 429. 4. Write a final test to confirm that exceeding the configured limit of failed attempts correctly triggers the '429 Too Many Requests' error. 5. Monitor server logs during testing to ensure the rate-limiter behaves as expected.",
+        "status": "pending",
+        "dependencies": [
+          9
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 16,
+        "title": "Resume Obsidian Integration",
+        "description": "Guide the user through the final steps of connecting their Obsidian vault to the Aletheia server, enabling seamless content synchronization and search.",
+        "details": "With the UI and login functionalities restored (Tasks 14 & 15), this task is to complete the Obsidian integration. First, verify that the Aletheia server's Obsidian API endpoint is active and accessible post-bug fixes. Create a clear, step-by-step guide or a UI wizard that walks the user through: 1. Entering their server URL and credentials into the Obsidian plugin settings. 2. Authenticating their account (leveraging the now-fixed email login). 3. Selecting their vault and initiating the first-time synchronization. Ensure robust error handling is in place to provide informative feedback if the connection fails at any step (e.g., incorrect URL, authentication failure, network issues).",
+        "testStrategy": "1. Manually verify that a user can successfully log in via the email method (confirming Task 15 fix). 2. Confirm that all UI elements, especially branding and logos, load correctly (confirming Task 14 fix). 3. Follow the newly created user guide/wizard to attempt a connection from a fresh Obsidian vault. 4. Check for a success message in the UI upon successful connection. 5. On the server-side, check the logs to confirm a successful authentication and handshake with the Obsidian client. 6. As a final verification, create a new note in the connected Obsidian vault and confirm that it becomes searchable/accessible through the Aletheia server interface.",
+        "status": "pending",
+        "dependencies": [
+          14,
+          15
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 17,
+        "title": "Analyze Dockerfile and Verify Static Asset Collection",
+        "description": "Investigate the Docker build process to confirm that the static assets, including the new Aletheia logos and webmanifest, are being correctly copied into the final image. This involves inspecting the Dockerfile and the file system of a running container.",
+        "details": "1. **Inspect Dockerfile**: Look for the `COPY` or `ADD` instructions that handle the frontend build output (typically from a `build` or `out` directory) and other static assets. Verify the source and destination paths. Pay close attention to the `collectstatic` command. \n2. **Exec into Running Container**: Start the container and use `docker exec -it <container_id> /bin/sh` to get a shell. \n3. **Verify File Locations**: Navigate to the directory where static files are supposed to be collected (the `STATIC_ROOT` defined in Django's `settings.py`). Run `ls -l` to check for the existence of `Aletheia_logo.svg`, `Aletheia_logo_text.svg`, and `aletheia.webmanifest`. Check their file permissions to ensure they are readable by the user running the web server.",
+        "testStrategy": "Successfully locate the logo and webmanifest files inside the running Docker container at the expected static root path using the `ls` command. File permissions should be at least `644` (readable by all).",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 18,
+        "title": "Review and Correct Django Static File Configuration",
+        "description": "Review and correct Django's static file settings to ensure it's configured to serve the Next.js frontend's static assets from the `/static/` URL path. This is a likely cause of the `404` on `/static/aletheia.webmanifest`.",
+        "details": "1. **Locate `settings.py`**: Find the main Django settings file.\n2. **Check `STATIC_URL`**: Ensure `STATIC_URL = '/static/'` is set.\n3. **Check `STATIC_ROOT`**: Ensure `STATIC_ROOT` is defined, e.g., `STATIC_ROOT = BASE_DIR / 'staticfiles'`.\n4. **Check `STATICFILES_DIRS`**: This is critical. It must include the path to the Next.js build output. Example: `STATICFILES_DIRS = [BASE_DIR / 'frontend/out']`.\n5. **Implement Whitenoise**: For robust static file serving in production, integrate the `whitenoise` library. Install it (`pip install whitenoise==6.6.0`). Add `'whitenoise.middleware.WhiteNoiseMiddleware'` to the top of the `MIDDLEWARE` list in `settings.py`, right after the `SecurityMiddleware`. Set `STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'`.",
+        "testStrategy": "After configuration, the `collectstatic` command should run without errors and copy files from the Next.js build directory into the `STATIC_ROOT`. A request to a known static file (like the webmanifest) should succeed once the server is running.",
+        "priority": "high",
+        "dependencies": [
+          17
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 19,
+        "title": "Audit Frontend Codebase for Incorrect Asset Paths",
+        "description": "The server logs show requests for logos without the `/static/` prefix. This strongly indicates that there are still hardcoded or incorrect paths in the frontend code. We need to find all such references.",
+        "details": "1. **Target Files**: The issue is likely in the Next.js part of the codebase, specifically within `.tsx` or `.jsx` files.\n2. **Search the Codebase**: Run a project-wide search (using `grep` or your IDE's search function) for the literal strings 'Aletheia_logo.svg' and 'Aletheia_logo_text.svg'.\n3. **Identify Problem Areas**: The search will likely find `<img>` tags or component props with incorrect `src` attributes, like `src=\"/Aletheia_logo.svg\"` instead of `src=\"/static/Aletheia_logo.svg\"`.\n4. **Pay special attention to `khojLogo.tsx`**: Although it was mentioned as updated, it's the primary suspect. Double-check its logic.",
+        "testStrategy": "Produce a list of all files and line numbers containing references to the logo files without the correct `/static/` prefix.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 20,
+        "title": "Fix Hardcoded Asset Paths in Next.js Frontend",
+        "description": "Based on the audit, update all identified instances in the Next.js frontend to use the correct, dynamically-resolved paths for static assets, ensuring they are prefixed with `/static/`.",
+        "details": "1. **Use Next.js `<Image>` component**: Where possible, refactor `<img>` tags to use Next.js's `<Image>` component, as it helps manage image optimization and paths. However, for SVG files, direct `<img>` tags are often simpler.\n2. **Correct `src` attributes**: Modify the incorrect paths found in the audit. The corrected path should be `src=\"/static/Aletheia_logo.svg\"`. \n3. **Pseudo-code Example**: \n   *Before*: `<img src=\"/Aletheia_logo.svg\" alt=\"Aletheia Logo\" />`\n   *After*: `<img src=\"/static/Aletheia_logo.svg\" alt=\"Aletheia Logo\" />`\n4. **Consider a base path helper**: If many paths need fixing, consider defining a constant for the static path to ensure consistency, e.g., `const STATIC_PATH = '/static';` and then use it like `src={\"`${STATIC_PATH}`/Aletheia_logo.svg\"}`.",
+        "testStrategy": "After changes, run the Next.js build (`next build`). Inspect the generated HTML/JS files in the `out` directory to confirm that all references to the logo assets now correctly include the `/static/` prefix.",
+        "priority": "medium",
+        "dependencies": [
+          18,
+          19
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 21,
+        "title": "Update Webmanifest and Favicon HTML Links",
+        "description": "The `aletheia.webmanifest` file is returning a 404. This requires ensuring the `<link>` tag in the main HTML document head points to the correct static path.",
+        "details": "1. **Locate the Head**: In Next.js, the main document head is typically managed in `src/pages/_document.tsx` or via the `next/head` component in `src/pages/_app.tsx`.\n2. **Inspect the `<link>` tag**: Find the `<link rel=\"manifest\" ...>` tag.\n3. **Correct the `href`**: The `href` attribute must point to the static path. Change `href=\"/aletheia.webmanifest\"` to `href=\"/static/aletheia.webmanifest\"`.\n4. **Check Favicon**: While there, check any associated favicon links (`<link rel=\"icon\" ...>`) for similar pathing issues and correct them as well.",
+        "testStrategy": "Inspect the `<head>` of the rendered HTML page using browser developer tools to verify that the `href` attribute for the webmanifest link is correctly set to `/static/aletheia.webmanifest`.",
+        "priority": "medium",
+        "dependencies": [
+          18,
+          19
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 22,
+        "title": "Rebuild and Deploy Fixed Docker Image",
+        "description": "After applying all code and configuration fixes, build a new Docker image and deploy it to a testing environment to prepare for final verification.",
+        "details": "1. **Ensure Clean Build**: It's good practice to remove old images to avoid caching issues. Run `docker image prune` or specifically remove the old image tag.\n2. **Run Docker Build**: Execute the standard Docker build command for the project, e.g., `docker build -t aletheia-app:latest .`.\n3. **Tag and Push (if applicable)**: If using a registry, tag the image appropriately and push it.\n4. **Deploy the Container**: Stop and remove the old running container. Start a new container from the newly built image, ensuring all necessary ports and environment variables are correctly configured.",
+        "testStrategy": "The Docker build command completes successfully. The `docker run` command starts the container without any immediate errors, and the application's server starts listening for requests.",
+        "priority": "medium",
+        "dependencies": [
+          20,
+          21
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 23,
+        "title": "End-to-End Verification and Log Monitoring",
+        "description": "Perform a final, comprehensive check of the deployed application to ensure the logo and static asset issues are fully resolved and no new regressions have been introduced.",
+        "details": "1. **Clear Browser Cache**: Use your browser's developer tools to perform a hard refresh and clear the cache to ensure you are not seeing stale content.\n2. **Load Application**: Navigate to the application's URL.\n3. **Visual Confirmation**: Visually confirm that the Aletheia logos are now displayed correctly.\n4. **Check DevTools Network Tab**: Open the Network tab in your browser's developer tools and reload the page. Filter for the asset names (`Aletheia_logo.svg`, `aletheia.webmanifest`) and confirm they return a `200 OK` status code.\n5. **Monitor Server Logs**: Check the live logs of the running container (`docker logs -f <container_id>`) to ensure no 404 errors related to these assets are being generated.",
+        "testStrategy": "The application loads correctly with all logos visible. The browser's network tab shows `200 OK` for all static assets. The server logs are free of 404 errors for the specified files. This meets all success criteria.",
+        "priority": "high",
+        "dependencies": [
+          22
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 24,
+        "title": "Document the Solution for Future Reference",
+        "description": "Document the root cause of the issue, the steps taken to fix it, and any new configurations (like Whitenoise) that were introduced. This will help prevent similar issues in the future.",
+        "details": "1. **Create a Markdown File**: Create a new file, e.g., `docs/troubleshooting/static-asset-fix.md`.\n2. **Summarize the Problem**: Briefly describe the 404 errors on static assets after the rebranding.\n3. **Explain the Root Cause**: Detail the findings. This was likely a two-part problem: a) Incorrect, hardcoded paths in the Next.js frontend code, and b) Potentially incomplete Django static file configuration for serving the Next.js build output.\n4. **Outline the Solution**: List the key changes made, including: correcting paths in `.tsx` files, verifying `STATICFILES_DIRS` in `settings.py`, and implementing `whitenoise` for robust serving in production.\n5. **Commit to Repository**: Add the documentation file to the project's Git repository.",
+        "testStrategy": "A markdown document is created and checked into the version control system, clearly explaining the problem and the solution for future reference by the development team.",
+        "priority": "low",
+        "dependencies": [
+          23
+        ],
+        "status": "pending",
+        "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-08-15T11:57:48.051Z",
-      "updated": "2025-08-17T15:39:00.819Z",
+      "updated": "2025-08-18T19:16:52.004Z",
       "description": "Tasks for master context"
     }
   }

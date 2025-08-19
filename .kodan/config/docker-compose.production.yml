@@ -41,7 +41,7 @@ services:
     depends_on:
       database:
         condition: service_healthy
-    image: ghcr.io/khoj-ai/khoj:2.0.0-beta.13
+    image: ghcr.io/photonentangled/aletheia:0.0.5
     ports:
       - "42110:42110"
     extra_hosts:
@@ -70,7 +70,8 @@ services:
       - KHOJ_TELEMETRY_DISABLE=True
       - KHOJ_TERRARIUM_URL=http://sandbox:8080
       - KHOJ_SEARXNG_URL=http://search:8080
-    command: --host="0.0.0.0" --port=42110 -vv --non-interactive
+      - RESEND_API_KEY=re_ds7u99gf_H6BqMbvHC4pz7HpwjS8hGbNV
+      - RESEND_EMAIL=noreply@kodan.space
     restart: unless-stopped
     networks:
       - kodan_network

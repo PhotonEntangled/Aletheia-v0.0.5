@@ -1,0 +1,99 @@
+2025-08-18T19:09:29.241Z [19:09:29.239309] INFO     khoj.configure: 🔑 Enabled           configure.py:343
+2025-08-18T19:09:29.241Z Authentication
+2025-08-18T19:09:29.241Z [19:09:29.236497] INFO     khoj.configure: 🔑 Enabled           configure.py:343
+2025-08-18T19:09:29.241Z Authentication
+2025-08-18T19:09:29.242Z [19:09:29.239033] INFO     khoj.configure: 🔑 Enabled           configure.py:343
+2025-08-18T19:09:29.242Z Authentication
+2025-08-18T19:09:29.242Z [19:09:29.237046] INFO     khoj.configure: 🔑 Enabled           configure.py:343
+2025-08-18T19:09:29.242Z Authentication
+2025-08-18T19:09:29.245Z [19:09:29.239171] INFO     khoj.configure: 🔑 Enabled           configure.py:343
+2025-08-18T19:09:29.245Z Authentication
+2025-08-18T19:09:37.008Z [19:09:37.005445] INFO     khoj.configure: 📡 Telemetry         configure.py:293
+2025-08-18T19:09:37.008Z disabled
+2025-08-18T19:09:37.041Z [2025-08-18 19:09:37 +0000] [7] [INFO] Started server process [7]
+2025-08-18T19:09:37.041Z [2025-08-18 19:09:37 +0000] [7] [INFO] Waiting for application startup.
+2025-08-18T19:09:37.041Z [2025-08-18 19:09:37 +0000] [7] [INFO] Application startup complete.
+2025-08-18T19:09:37.043Z [19:09:37.041118] INFO     khoj.configure: 📡 Telemetry         configure.py:293
+2025-08-18T19:09:37.043Z disabled
+2025-08-18T19:09:37.051Z [2025-08-18 19:09:37 +0000] [8] [INFO] Started server process [8]
+2025-08-18T19:09:37.053Z [2025-08-18 19:09:37 +0000] [8] [INFO] Waiting for application startup.
+2025-08-18T19:09:37.053Z [2025-08-18 19:09:37 +0000] [8] [INFO] Application startup complete.
+2025-08-18T19:09:37.089Z 10.0.1.15:48092 - "GET / HTTP/1.1" 200
+2025-08-18T19:09:37.368Z 10.0.1.15:48092 - "GET /Aletheia_logo_text.svg HTTP/1.1" 404
+2025-08-18T19:09:37.526Z 10.0.1.15:40060 - "GET /api/chat/options HTTP/1.1" 200
+2025-08-18T19:09:37.530Z 10.0.1.15:48092 - "GET /api/v1/user HTTP/1.1" 200
+2025-08-18T19:09:37.579Z 10.0.1.15:40060 - "GET /static/aletheia.webmanifest HTTP/1.1" 404
+2025-08-18T19:09:37.586Z [19:09:37.585048] INFO     khoj.configure: 📡 Telemetry         configure.py:293
+2025-08-18T19:09:37.586Z disabled
+2025-08-18T19:09:37.604Z [2025-08-18 19:09:37 +0000] [9] [INFO] Started server process [9]
+2025-08-18T19:09:37.606Z [2025-08-18 19:09:37 +0000] [9] [INFO] Waiting for application startup.
+2025-08-18T19:09:37.606Z [2025-08-18 19:09:37 +0000] [9] [INFO] Application startup complete.
+2025-08-18T19:09:37.608Z 10.0.1.15:40050 - "GET /api/settings?detailed=true HTTP/1.1" 200
+2025-08-18T19:09:37.692Z [19:09:37.689273] INFO     khoj.configure: 📡 Telemetry         configure.py:293
+2025-08-18T19:09:37.693Z disabled
+2025-08-18T19:09:37.713Z [2025-08-18 19:09:37 +0000] [12] [INFO] Started server process [12]
+2025-08-18T19:09:37.713Z [2025-08-18 19:09:37 +0000] [12] [INFO] Waiting for application startup.
+2025-08-18T19:09:37.713Z [2025-08-18 19:09:37 +0000] [12] [INFO] Application startup complete.
+2025-08-18T19:09:37.736Z 10.0.1.15:40050 - "GET /Aletheia_logo_text.svg HTTP/1.1" 404
+2025-08-18T19:09:37.757Z 10.0.1.15:40060 - "GET /api/chat/sessions HTTP/1.1" 200
+2025-08-18T19:09:37.760Z [19:09:37.759288] INFO     khoj.configure: 📡 Telemetry         configure.py:293
+2025-08-18T19:09:37.760Z disabled
+2025-08-18T19:09:37.767Z [2025-08-18 19:09:37 +0000] [10] [INFO] Started server process [10]
+2025-08-18T19:09:37.767Z [2025-08-18 19:09:37 +0000] [10] [INFO] Waiting for application startup.
+2025-08-18T19:09:37.768Z [2025-08-18 19:09:37 +0000] [10] [INFO] Application startup complete.
+2025-08-18T19:09:37.773Z /usr/local/lib/python3.10/dist-packages/django/db/models/fields/__init__.py:1665: RuntimeWarning: DateTimeField Conversation.updated_at received a naive datetime (2025-08-04 19:09:37.771624) while time zone support is active.
+2025-08-18T19:09:37.773Z warnings.warn(
+2025-08-18T19:09:37.785Z 10.0.1.15:48092 - "GET /api/agents HTTP/1.1" 200
+2025-08-18T19:09:37.812Z [19:09:37.811588] INFO     khoj.configure: 📡 Telemetry         configure.py:293
+2025-08-18T19:09:37.812Z disabled
+2025-08-18T19:09:37.817Z [2025-08-18 19:09:37 +0000] [11] [INFO] Started server process [11]
+2025-08-18T19:09:37.818Z [2025-08-18 19:09:37 +0000] [11] [INFO] Waiting for application startup.
+2025-08-18T19:09:37.818Z [2025-08-18 19:09:37 +0000] [11] [INFO] Application startup complete.
+2025-08-18T19:09:52.989Z 10.0.1.15:50136 - "GET /wordpress/wp-admin/setup-config.php HTTP/1.1" 404
+2025-08-18T19:09:59.920Z 10.0.1.15:50140 - "GET /api/chat/sessions HTTP/1.1" 403
+2025-08-18T19:10:04.157Z 10.0.1.15:60544 - "GET / HTTP/1.1" 200
+2025-08-18T19:10:04.342Z 10.0.1.15:60544 - "GET /static/_next/static/media/40381518f67e6cb9-s.p.woff2 HTTP/1.1" 200
+2025-08-18T19:10:04.346Z 10.0.1.15:60556 - "GET /static/_next/static/media/77c207b095007c34-s.p.woff2 HTTP/1.1" 200
+2025-08-18T19:10:04.356Z 10.0.1.15:60638 - "GET /static/_next/static/css/ea5485b3f3859a5a.css HTTP/1.1" 200
+2025-08-18T19:10:04.357Z 10.0.1.15:60654 - "GET /static/_next/static/css/a0c2fd63bb396f04.css HTTP/1.1" 200
+2025-08-18T19:10:04.357Z 10.0.1.15:60624 - "GET /static/_next/static/media/a6ecd16fa044d500-s.p.woff2 HTTP/1.1" 200
+2025-08-18T19:10:04.359Z 10.0.1.15:60618 - "GET /static/_next/static/media/c4250770ab8708b6-s.p.woff2 HTTP/1.1" 200
+2025-08-18T19:10:04.359Z 10.0.1.15:60614 - "GET /static/_next/static/media/82ef96de0e8f4d8c-s.p.woff2 HTTP/1.1" 200
+2025-08-18T19:10:04.359Z 10.0.1.15:60660 - "GET /static/_next/static/css/93eeacc43e261162.css HTTP/1.1" 200
+2025-08-18T19:10:04.362Z 10.0.1.15:60560 - "GET /static/_next/static/media/1d8a05b60287ae6c-s.p.woff2 HTTP/1.1" 200
+2025-08-18T19:10:04.363Z 10.0.1.15:60608 - "GET /static/_next/static/css/5b28ced915454767.css HTTP/1.1" 200
+2025-08-18T19:10:04.363Z 10.0.1.15:60568 - "GET /static/_next/static/media/bd82c78e5b7b3fe9-s.p.woff2 HTTP/1.1" 200
+2025-08-18T19:10:04.363Z 10.0.1.15:60582 - "GET /static/_next/static/css/7889a30fe9c83846.css HTTP/1.1" 200
+2025-08-18T19:10:04.364Z 10.0.1.15:60592 - "GET /static/_next/static/css/f1e754f891058ee6.css HTTP/1.1" 200
+2025-08-18T19:10:04.455Z 10.0.1.15:60560 - "GET /Aletheia_logo_text.svg HTTP/1.1" 404
+2025-08-18T19:10:06.844Z 10.0.1.15:60662 - "GET /static/_next/static/chunks/webpack-4e4d91e0be95b24f.js HTTP/1.1" 200
+2025-08-18T19:10:08.962Z 10.0.1.15:60670 - "GET /static/_next/static/chunks/fd9d1056-aa94101ec5388dba.js HTTP/1.1" 200
+2025-08-18T19:10:14.557Z 10.0.1.15:44208 - "GET /static/_next/static/chunks/2117-080746c8e170c81a.js HTTP/1.1" 200
+2025-08-18T19:10:20.831Z 10.0.1.15:44216 - "GET /static/_next/static/chunks/main-app-af66dff410af731a.js HTTP/1.1" 200
+2025-08-18T19:10:22.066Z 10.0.1.15:44216 - "GET /static/_next/static/chunks/2939-4af3fd24b8ffc9ad.js HTTP/1.1" 200
+2025-08-18T19:10:22.180Z 10.0.1.15:44216 - "GET /static/_next/static/chunks/7200-93ab0072359b8028.js HTTP/1.1" 200
+2025-08-18T19:10:22.185Z 10.0.1.15:44216 - "GET /static/_next/static/chunks/8667-50b03a89e82e0ba7.js HTTP/1.1" 200
+2025-08-18T19:10:22.403Z 10.0.1.15:44216 - "GET /static/_next/static/chunks/1327-e254819a9172cfa7.js HTTP/1.1" 200
+2025-08-18T19:10:22.408Z 10.0.1.15:51628 - "GET /static/_next/static/chunks/7626-1b630f1654172341.js HTTP/1.1" 200
+2025-08-18T19:10:22.411Z 10.0.1.15:51612 - "GET /static/_next/static/chunks/4447-cd95608f8e93e711.js HTTP/1.1" 200
+2025-08-18T19:10:24.193Z 10.0.1.15:44216 - "GET /static/_next/static/chunks/3592-b2a2444b0ec7b119.js HTTP/1.1" 200
+2025-08-18T19:10:24.194Z 10.0.1.15:51612 - "GET /static/_next/static/chunks/3595-ac8e81e04ecb89cb.js HTTP/1.1" 200
+2025-08-18T19:10:24.625Z 10.0.1.15:51612 - "GET /static/_next/static/chunks/2327-0c51c01e85af34b0.js HTTP/1.1" 200
+2025-08-18T19:10:24.765Z 10.0.1.15:51612 - "GET /static/_next/static/chunks/5477-c4209b72942d3038.js HTTP/1.1" 200
+2025-08-18T19:10:24.772Z 10.0.1.15:51612 - "GET /static/_next/static/chunks/5427-a95ec748e52abb75.js HTTP/1.1" 200
+2025-08-18T19:10:25.381Z 10.0.1.15:51612 - "GET /static/_next/static/chunks/app/page-6aab53ad55e42002.js HTTP/1.1" 200
+2025-08-18T19:10:25.381Z 10.0.1.15:44216 - "GET /static/_next/static/chunks/app/layout-e5b2f3cdb9ba7116.js HTTP/1.1" 200
+2025-08-18T19:10:25.785Z 10.0.1.15:51612 - "GET /static/aletheia.webmanifest HTTP/1.1" 404
+2025-08-18T19:10:25.856Z 10.0.1.15:44216 - "GET /api/settings?detailed=true HTTP/1.1" 403
+2025-08-18T19:10:25.856Z 10.0.1.15:51612 - "GET /api/v1/user HTTP/1.1" 403
+2025-08-18T19:10:25.880Z 10.0.1.15:44216 - "GET /api/chat/options HTTP/1.1" 200
+2025-08-18T19:10:26.051Z 10.0.1.15:44216 - "GET /auth/oauth/metadata HTTP/1.1" 200
+2025-08-18T19:10:26.294Z 10.0.1.15:44216 - "GET /api/agents HTTP/1.1" 200
+2025-08-18T19:10:26.500Z 10.0.1.15:44216 - "GET /Aletheia_logo.svg HTTP/1.1" 404
+2025-08-18T19:10:26.542Z 10.0.1.15:44216 - "GET /Aletheia_logo_text.svg HTTP/1.1" 404
+2025-08-18T19:10:31.360Z 10.0.1.15:50106 - "GET /auth/oauth/metadata HTTP/1.1" 200
+2025-08-18T19:10:31.374Z 10.0.1.15:50106 - "GET /terms-of-service.txt?_rsc=1wtp7 HTTP/1.1" 404
+2025-08-18T19:10:31.375Z 10.0.1.15:50114 - "GET /privacy-policy.txt?_rsc=1wtp7 HTTP/1.1" 404
+2025-08-18T19:10:43.632Z 10.0.1.15:56118 - "GET /auth/oauth/metadata HTTP/1.1" 200
+2025-08-18T19:10:44.028Z 10.0.1.15:56118 - "GET /wp-admin/setup-config.php HTTP/1.1" 404
+2025-08-18T19:10:54.660Z 10.0.1.15:59482 - "GET /wordpress/wp-admin/setup-config.php HTTP/1.1" 404

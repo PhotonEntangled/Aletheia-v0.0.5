@@ -1,11 +1,53 @@
-.*
-**/__pycache__/
+# Git history
+.git/
+
+# IDE & Tooling Caches / Configs
+.vscode/
+.cursor/
+.mypy_cache/
+.pytest_cache/
+.taskmaster/
+.devcontainer/
+
+# Node dependencies - CRITICAL
+node_modules/
+src/interface/web/node_modules/
+
+# Python Virtual Environments & Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
 *.egg-info/
-documentation/
-tests/
+.installed.cfg
+*.egg
+.venv/
+venv/
+env/
+
+# Build artifacts
 build/
 dist/
-scripts/
-src/interface/
-src/telemetry/
-!src/interface/web
+
+# Local secrets and configs
+.env
+production.env
+.kodan/
+
+# Logs and temp files
+logs/
+*.log
+tmp/
+temp/
+
+# Other project files not needed in the final image
+.dockerignore
+.gitignore
+.gitattributes
+.pre-commit-config.yaml
+README-KODAN.md
+n8n-server/
+n8n-workflows/
+documentation/
+tests/

@@ -1,0 +1,8 @@
+2025-08-18T10:29:25.169Z usage: gunicorn [OPTIONS] [APP_MODULE]
+2025-08-18T10:29:25.169Z gunicorn: error: unrecognized arguments: khoj.main:app
+2025-08-18T10:29:25.726Z usage: gunicorn [OPTIONS] [APP_MODULE]
+2025-08-18T10:29:25.726Z gunicorn: error: unrecognized arguments: khoj.main:app
+2025-08-18T10:29:26.538Z usage: gunicorn [OPTIONS] [APP_MODULE]
+2025-08-18T10:29:26.538Z gunicorn: error: unrecognized arguments: khoj.main:app
+2025-08-18T10:29:27.484Z usage: gunicorn [OPTIONS] [APP_MODULE]
+2025-08-18T10:29:27.484Z gunicorn: error: unrecognized arguments: khoj.main:app

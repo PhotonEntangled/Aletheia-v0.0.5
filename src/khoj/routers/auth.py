@@ -81,7 +81,7 @@ async def login(request: Request):
 async def login_magic_link(
     request: Request,
     form: MagicLinkForm,
-    email_limiter=Depends(EmailAttemptRateLimiter(requests=20, window=60 * 60 * 24, slug="magic_link_login_by_email")),
+    # email_limiter=Depends(EmailAttemptRateLimiter(requests=20, window=60 * 60 * 24, slug="magic_link_login_by_email")),
 ):
     if request.user.is_authenticated:
         # Clear the session if user is already authenticated
@@ -94,8 +94,8 @@ async def login_magic_link(
         raise HTTPException(status_code=404, detail="Invalid email address. Please fix before trying again.")
 
     # Rate limit email login by user
-    user_limiter = EmailVerificationApiRateLimiter(requests=10, window=60 * 60 * 24, slug="magic_link_login_by_user")
-    await user_limiter(email=user.email)
+    # user_limiter = EmailVerificationApiRateLimiter(requests=10, window=60 * 60 * 24, slug="magic_link_login_by_user")
+    # await user_limiter(email=user.email)
 
     # Send email with magic link
     unique_id = user.email_verification_code
@@ -118,9 +118,9 @@ async def sign_in_with_magic_link(
     email: EmailStr,
     code: str,
     remember_me: bool = False,
-    user_limiter=Depends(
-        EmailVerificationApiRateLimiter(requests=10, window=60 * 60 * 24, slug="magic_link_verification")
-    ),
+    # user_limiter=Depends(
+    #     EmailVerificationApiRateLimiter(requests=10, window=60 * 60 * 24, slug="magic_link_verification")
+    # ),
 ):
     user, code_is_expired = await aget_user_validated_by_email_verification_code(code, email)
 

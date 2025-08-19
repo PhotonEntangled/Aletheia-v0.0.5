@@ -18,6 +18,7 @@ import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { GoogleSignIn } from "./GoogleSignIn";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
+import { AletheiaLogo } from "../logo/khojLogo";
 import {
     Carousel,
     CarouselContent,
@@ -444,8 +445,12 @@ function MainSignInContext({
                 </Carousel>
             )}
             <div className="flex flex-col gap-4 text-center p-2">
+                <AletheiaLogo className="w-20 h-20 mx-auto mb-2" />
                 <div className="text-center font-bold text-xl">
-                    Sign in to unlock your second brain
+                    Welcome to Aletheia
+                </div>
+                <div className="text-center text-muted-foreground text-sm">
+                    Sign in to access your knowledge assistant
                 </div>
             </div>
             <div className="flex flex-col gap-8 pb-4 text-center align-middle items-center">
@@ -515,8 +520,8 @@ function MainSignInContext({
             </div>
             <div className="text-center text-muted-foreground text-sm mb-[20px]">
                 By logging in, you agree to our{" "}
-                <Link href="https://khoj.dev/terms-of-service">Terms of Service</Link>. See{" "}
-                <Link href="https://khoj.dev/privacy-policy">Privacy Policy</Link>.
+                <Link href="https://kodan.space/terms-of-service">Terms of Service</Link>. See{" "}
+                <Link href="https://kodan.space/privacy-policy">Privacy Policy</Link>.
             </div>
         </div>
     );

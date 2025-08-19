@@ -1,108 +1,139 @@
-<p align="center"><img src="https://assets.khoj.dev/khoj-logo-sideways-1200x540.png" width="230" alt="Khoj Logo"></p>
+# ALETHEIA 🚀
+**Agentic Learning Engine for Transformative, Holistic Exploration and Intelligent Analysis**
 
-<div align="center">
-
-[![test](https://github.com/khoj-ai/khoj/actions/workflows/test.yml/badge.svg)](https://github.com/khoj-ai/khoj/actions/workflows/test.yml)
-[![docker](https://github.com/khoj-ai/khoj/actions/workflows/dockerize.yml/badge.svg)](https://github.com/khoj-ai/khoj/pkgs/container/khoj)
-[![pypi](https://github.com/khoj-ai/khoj/actions/workflows/pypi.yml/badge.svg)](https://pypi.org/project/khoj/)
+[![Deploy Status](https://github.com/PhotonEntangled/kodan/actions/workflows/deploy.yml/badge.svg)](https://github.com/PhotonEntangled/kodan/actions/workflows/deploy.yml)
 [![discord](https://img.shields.io/discord/1112065956647284756?style=plastic&label=discord)](https://discord.gg/BDgyabRM6e)
 
-</div>
+> Self-hosted AI assistant based on Khoj v2.0.0-beta.13 with enhanced Telegram bot integration, n8n automation, and production-ready Dokploy deployment.
 
-<div align="center">
-<b>Your AI second brain</b>
-</div>
+## 🎯 What is ALETHEIA?
 
-<br />
+ALETHEIA is your personal AI second brain that extends the capabilities of [Khoj](https://khoj.dev) with a focus on robust, self-hosted deployment and automation. It smoothly scales up from an on-device personal AI to a cloud-scale enterprise AI.
 
-<div align="center">
+- 🤖 **Telegram Bot Integration** - Chat with your AI directly in Telegram.
+- 🔄 **n8n Automation Platform** - Create powerful AI-driven workflows.
+- 🚀 **Production Deployment** - Ready-to-deploy with Dokploy on your own VPS.
+- 🔍 **Research Mode** - Start any message with `/research` for enhanced AI research capabilities.
+- 🎭 **Custom Agents** - Create specialized AI agents for different tasks with tunable personality, tools, and knowledge bases.
+- 🌐 **Self-Hosted** - Retain complete control over your data and AI.
+- 💬 **Chat with any LLM** - Supports local and online models (e.g., Llama 3, Qwen, Gemma, Mistral, GPT, Claude, Gemini, DeepSeek).
+- 📄 **Knowledge Retrieval** - Get answers from the internet and your documents (including images, PDFs, Markdown, Org-mode, Word, Notion).
+- 🖼️ **Image Generation** - Generate images directly from your chat.
 
-[📑 Docs](https://docs.khoj.dev)
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-[🌐 Web](https://khoj.dev)
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-[🔥 App](https://app.khoj.dev)
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-[💬 Discord](https://discord.gg/BDgyabRM6e)
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-[✍🏽 Blog](https://blog.khoj.dev)
+## 🏗️ Architecture
 
-<a href="https://trendshift.io/repositories/10318" target="_blank"><img src="https://trendshift.io/api/badge/repositories/10318" alt="khoj-ai%2Fkhoj | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+```
+Telegram Bot ↔ n8n.kodan.space ↔ n8n Container ↔ ALETHEIA Container
+                                                      ↕
+                                               PostgreSQL + pgvector
+```
 
-</div>
-
-***
-
-### 🎁 New
-* Start any message with `/research` to try out the experimental research mode with Khoj.
-* Anyone can now [create custom agents](https://blog.khoj.dev/posts/create-agents-on-khoj/) with tunable personality, tools and knowledge bases.
-* [Read](https://blog.khoj.dev/posts/evaluate-khoj-quality/) about Khoj's excellent performance on modern retrieval and reasoning benchmarks.
-
-***
-
-## Overview
-
-[Khoj](https://khoj.dev) is a personal AI app to extend your capabilities. It smoothly scales up from an on-device personal AI to a cloud-scale enterprise AI.
-
-- Chat with any local or online LLM (e.g llama3, qwen, gemma, mistral, gpt, claude, gemini, deepseek).
-- Get answers from the internet and your docs (including image, pdf, markdown, org-mode, word, notion files).
-- Access it from your Browser, Obsidian, Emacs, Desktop, Phone or Whatsapp.
-- Create agents with custom knowledge, persona, chat model and tools to take on any role.
-- Automate away repetitive research. Get personal newsletters and smart notifications delivered to your inbox.
-- Find relevant docs quickly and easily using our advanced semantic search.
-- Generate images, talk out loud, play your messages.
-- Khoj is open-source, self-hostable. Always.
-- Run it privately on [your computer](https://docs.khoj.dev/get-started/setup) or try it on our [cloud app](https://app.khoj.dev).
-
-***
-
-## See it in action
+## ✨ See it in action
 
 ![demo_chat](https://github.com/khoj-ai/khoj/blob/master/documentation/assets/img/quadratic_equation_khoj_web.gif?raw=true)
 
-Go to https://app.khoj.dev to see Khoj live.
+## 🚀 Quick Start
 
-## Full feature list
-You can see the full feature list [here](https://docs.khoj.dev/category/features).
+### Prerequisites
+- VPS with Docker and Dokploy installed
+- Domain name (e.g., `kodan.space`)
+- OpenRouter API key for AI models
 
-## Self-Host
+### 1. Clone and Configure
+```bash
+git clone https://github.com/PhotonEntangled/kodan.git
+cd kodan
+cp production.env.example production.env
+# Edit production.env with your settings
+```
 
-To get started with self-hosting Khoj, [read the docs](https://docs.khoj.dev/get-started/setup).
+### 2. Deploy with Dokploy
+1. Upload `docker-compose.production.yml` to Dokploy.
+2. Configure domain routing:
+   - `kodan.space` → server service (port 42110)
+   - `n8n.kodan.space` → n8n service (port 5678)
+3. Deploy and enjoy!
 
-## Enterprise
+## 🤖 Telegram Bot Setup
 
-Khoj is available as a cloud service, on-premises, or as a hybrid solution. To learn more about Khoj Enterprise, [visit our website](https://khoj.dev/teams).
+1. Create a bot with [@BotFather](https://t.me/botfather).
+2. Get your bot token.
+3. Configure a webhook in your n8n instance pointing to the ALETHEIA API endpoint.
+4. Start chatting with your new AI assistant!
 
-## Frequently Asked Questions (FAQ)
+## 🔧 Configuration
 
-Q: Can I use Khoj without self-hosting?
+### Environment Variables
+Key settings in `production.env`:
+- `KHOJ_DOMAIN=kodan.space` - Your domain
+- `OPENAI_API_KEY=sk-or-v1-...` - Your OpenRouter API key
+- `KHOJ_DEFAULT_CHAT_MODEL=google/gemini-2.5-pro-latest` - Your preferred AI model
+- `WEBHOOK_URL=https://n8n.kodan.space` - Your n8n webhook URL
 
-Yes! You can use Khoj right away at [https://app.khoj.dev](https://app.khoj.dev) — no setup required.
+### Docker Services
+- **ALETHEIA Server** - Main AI backend (port 42110)
+- **n8n** - Automation platform (port 5678)
+- **PostgreSQL** - Database with pgvector for vector search
+- **SearXNG** - Private, metasearch engine
+- **Terrarium** - Code execution sandbox
 
-Q: What kinds of documents can Khoj read?
+## 🛠️ Development
 
-Khoj supports a wide variety: PDFs, Markdown, Notion, Word docs, org-mode files, and more.
+### Local Setup
+```bash
+git checkout kodan-v2-development
+pip install -r requirements.txt
+docker-compose up -d database
+python src/khoj/main.py --host="0.0.0.0" --port=42110
+```
 
-Q: How can I make my own agent?
+### Testing
+```bash
+pytest tests/
+```
 
-Check out [this blog post](https://blog.khoj.dev/posts/create-agents-on-khoj/) for a step-by-step guide to custom agents.
-For more questions, head over to our [Discord](https://discord.gg/BDgyabRM6e)!
+## 🚀 CI/CD Pipeline
 
+The repository is configured for automated deployment on push to the `kodan-v2-development` branch. The workflow will:
+1. **Test** - Run automated tests.
+2. **Build** - Create Docker images.
+3. **Deploy** - Update the production environment via SSH.
 
-## Contributors
-Cheers to our awesome contributors! 🎉
+Configure these secrets in your GitHub repository settings for the pipeline to work:
+- `HOST` - Your VPS IP address
+- `USERNAME` - SSH username
+- `SSH_KEY` - Private SSH key for server access
 
-<a href="https://github.com/khoj-ai/khoj/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=khoj-ai/khoj" />
-</a>
+## 📊 Tech Stack
 
-Made with [contrib.rocks](https://contrib.rocks).
+- **Backend**: Python, FastAPI, Django
+- **Database**: PostgreSQL + pgvector
+- **Frontend**: Next.js, TypeScript, React
+- **Deployment**: Docker, Dokploy, Traefik
+- **Automation**: n8n workflow platform
+- **AI**: OpenRouter (for models like Gemini, GPT, Claude)
 
-### Interested in Contributing?
-Khoj is open source. It is sustained by the community and we’d love for you to join it! Whether you’re a coder, designer, writer, or enthusiast, there’s a place for you.
+## 🤝 Contributing
 
-Why Contribute?
-- Make an Impact: Help build, test and improve a tool used by thousands to boost productivity.
-- Learn & Grow: Work on cutting-edge AI, LLMs, and semantic search technologies.
+This project is a fork and contributions specific to ALETHEIA are welcome.
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/amazing-feature`).
+3. Commit your changes (`git commit -m 'Add amazing feature'`).
+4. Push to the branch (`git push origin feature/amazing-feature`).
+5. Open a Pull Request.
 
-You can help us build new features, improve the project documentation, report issues and fix bugs. If you're a developer, please see our [Contributing Guidelines](https://docs.khoj.dev/contributing/development) and check out [good first issues](https://github.com/khoj-ai/khoj/contribute) to work on.
+For general contributions to the underlying platform, please see the original [Khoj Contributing Guidelines](https://docs.khoj.dev/contributing/development).
+
+## 📄 License
+
+Based on [Khoj](https://github.com/khoj-ai/khoj) - AGPL-3.0 License
+
+## 🙏 Acknowledgments
+
+- [Khoj AI](https://khoj.dev) - The foundation of ALETHEIA
+- [n8n](https://n8n.io) - Workflow automation
+- [Dokploy](https://dokploy.com) - Deployment platform
+
+---
+
+**ALETHEIA** - Your AI-powered knowledge navigation system 🧠✨
