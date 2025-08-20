@@ -80,7 +80,7 @@ services:
 
   mcp:
     build:
-      context: .
+      context: ../../
       dockerfile: mcp.Dockerfile
     restart: unless-stopped
     networks:
