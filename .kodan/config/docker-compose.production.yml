@@ -47,11 +47,22 @@ services:
     volumes:
       - khoj_config:/app/config
       - khoj_models:/app/models
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./taskmaster_project.json:/app/taskmaster_project.json
+      - ./.taskmaster:/app/.taskmaster
     environment:
-      - KHOJ_CONFIG_PATH=/app/config
-      - KHOJ_MODELS_PATH=/app/models
+      - KHOJ_CONFIG_PATH=/app/config/khoj.yml
+      - KHOJ_ANALYTICS_OPTOUT=true
+      - KHOJ_PUBLIC_SHARE=False
+      - KHOJ_GUI_MODE=True
       - KHOJ_HOST=0.0.0.0
       - KHOJ_PORT=42110
+      - KHOJ_WEB_APP_URL=https://kodan.space
+      - KHOJ_POSTGRES_USER=postgres
+      - KHOJ_POSTGRES_PASSWORD=postgres
+      - KHOJ_POSTGRES_HOST=database
+      - KHOJ_POSTGRES_PORT=5432
+      - KHOJ_POSTGRES_DB=postgres
       - KHOJ_TELEMETRY_DISABLE=True
       - KHOJ_TERRARIUM_URL=http://sandbox:8080
       - KHOJ_SEARXNG_URL=http://search:8080
@@ -59,11 +70,11 @@ services:
       - RESEND_EMAIL=noreply@kodan.space
     command: --host="0.0.0.0" --port=42110 -vv --non-interactive
     restart: unless-stopped
+    networks:
+      - khoj_network
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.server.loadbalancer.server.port=42110"
-    networks:
-      - khoj_network
 
   n8n:
     image: nginx:alpine
@@ -85,9 +96,6 @@ services:
       - khoj_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mcp.rule=Host(`mcp.kodan.space`)"
-      - "traefik.http.routers.mcp.entrypoints=websecure"
-      - "traefik.http.routers.mcp.tls.certresolver=myresolver"
       - "traefik.http.services.mcp.loadbalancer.server.port=65432"
     environment:
       - TASKMASTER_PROJECT_ROOT=/app
