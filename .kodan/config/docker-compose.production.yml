@@ -41,32 +41,17 @@ services:
     depends_on:
       database:
         condition: service_healthy
-    image: ghcr.io/photonentangled/aletheia:0.0.6
+    image: ghcr.io/khoj-ai/khoj:2.0.0-beta.13
     ports:
       - "42110:42110"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    working_dir: /app
     volumes:
-      - khoj_config:/root/.khoj/
-      - khoj_models:/root/.cache/torch/sentence_transformers
-      - khoj_models:/root/.cache/huggingface
+      - khoj_config:/app/config
+      - khoj_models:/app/models
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=database
-      - POSTGRES_PORT=5432
-      - KHOJ_DJANGO_SECRET_KEY=your-production-secret-key-change-this
-      - KHOJ_DEBUG=False
-      - KHOJ_ADMIN_EMAIL=zero@kodan.space
-      - KHOJ_ADMIN_PASSWORD=ChangeThisPassword123!
-      - KHOJ_NO_HTTPS=False
-      - KHOJ_DOMAIN=kodan.space
-      - OPENAI_BASE_URL=https://openrouter.ai/api/v1
-      - KHOJ_DEFAULT_CHAT_MODEL=google/gemini-2.5-pro-latest
-      - OPENAI_API_KEY=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
-      - JINA_API_KEY=jina_2f54a4afdbfa41f89ecabbad037dd2936I3ZEqEZWgB3MKy93_uAd9WqFuUC
+      - KHOJ_CONFIG_PATH=/app/config
+      - KHOJ_MODELS_PATH=/app/models
+      - KHOJ_HOST=0.0.0.0
+      - KHOJ_PORT=42110
       - KHOJ_TELEMETRY_DISABLE=True
       - KHOJ_TERRARIUM_URL=http://sandbox:8080
       - KHOJ_SEARXNG_URL=http://search:8080
@@ -74,11 +59,11 @@ services:
       - RESEND_EMAIL=noreply@kodan.space
     command: --host="0.0.0.0" --port=42110 -vv --non-interactive
     restart: unless-stopped
-    networks:
-      - khoj_network
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.server.loadbalancer.server.port=42110"
+    networks:
+      - khoj_network
 
   n8n:
     image: nginx:alpine
