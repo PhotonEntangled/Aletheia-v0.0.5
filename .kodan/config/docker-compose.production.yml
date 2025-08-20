@@ -79,9 +79,7 @@ services:
       - ../files/nginx-n8n.conf:/etc/nginx/nginx.conf
 
   mcp:
-    build:
-      context: ../../
-      dockerfile: mcp.Dockerfile
+    image: ghcr.io/photonentangled/aletheia-mcp:0.0.1
     restart: unless-stopped
     networks:
       - khoj_network
