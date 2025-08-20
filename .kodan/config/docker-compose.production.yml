@@ -72,9 +72,26 @@ services:
       - KHOJ_SEARXNG_URL=http://search:8080
       - RESEND_API_KEY=re_ds7u99gf_H6BqMbvHC4pz7HpwjS8hGbNV
       - RESEND_EMAIL=noreply@kodan.space
+    command: --host="0.0.0.0" --port=42110 -vv --non-interactive
     restart: unless-stopped
     networks:
       - khoj_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.server.loadbalancer.server.port=42110"
+
+  n8n:
+    image: nginx:alpine
+    restart: unless-stopped
+    expose:
+      - "5678"
+    networks:
+      - khoj_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+    volumes:
+      - ../files/nginx-n8n.conf:/etc/nginx/nginx.conf
 
 networks:
   khoj_network:
