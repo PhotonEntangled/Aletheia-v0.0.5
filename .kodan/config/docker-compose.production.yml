@@ -99,6 +99,7 @@ services:
       - "traefik.http.services.mcp.loadbalancer.server.port=65432"
     environment:
       - TASKMASTER_PROJECT_ROOT=/app
+      - OPENROUTER_API_KEY=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
     volumes:
       - ./pyproject.toml:/app/pyproject.toml
       - ./taskmaster_project.json:/app/taskmaster_project.json
