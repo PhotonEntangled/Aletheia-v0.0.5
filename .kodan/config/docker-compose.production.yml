@@ -13,8 +13,6 @@ services:
       timeout: 10s
       retries: 5
     restart: unless-stopped
-    networks:
-      - kodan_network
 
   sandbox:
     image: ghcr.io/khoj-ai/terrarium:latest
@@ -24,8 +22,6 @@ services:
       timeout: 10s
       retries: 2
     restart: unless-stopped
-    networks:
-      - kodan_network
 
   search:
     image: docker.io/searxng/searxng:latest
@@ -34,8 +30,6 @@ services:
     environment:
       - SEARXNG_BASE_URL=http://localhost:8080/
     restart: unless-stopped
-    networks:
-      - kodan_network
 
   server:
     depends_on:
@@ -73,21 +67,34 @@ services:
       - RESEND_API_KEY=re_ds7u99gf_H6BqMbvHC4pz7HpwjS8hGbNV
       - RESEND_EMAIL=noreply@kodan.space
     restart: unless-stopped
-    networks:
-      - kodan_network
-      - web
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.server.rule=Host(`kodan.space`)"
       - "traefik.http.routers.server.entrypoints=websecure"
       - "traefik.http.routers.server.tls.certresolver=myresolver"
       - "traefik.http.services.server.loadbalancer.server.port=42110"
+    networks:
+      - kodan_network
+
+  n8n:
+    image: nginx:alpine
+    restart: unless-stopped
+    expose:
+      - "5678"
+    networks:
+      - kodan_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.n8n.rule=Host(`n8n.kodan.space`)"
+      - "traefik.http.routers.n8n.entrypoints=websecure"
+      - "traefik.http.routers.n8n.tls.certresolver=myresolver"
+      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+    volumes:
+      - ../files/nginx-n8n.conf:/etc/nginx/nginx.conf
 
 networks:
   kodan_network:
     driver: bridge
-  web:
-    external: true
 
 volumes:
   khoj_config:
