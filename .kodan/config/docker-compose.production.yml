@@ -2,9 +2,9 @@ services:
   database:
     image: docker.io/pgvector/pgvector:pg15
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      POSTGRAM_USER: postgres
+      POSTGRAM_PASSWORD: postgres
+      POSTGRAM_DB: postgres
     volumes:
       - khoj_db:/var/lib/postgresql/data/
     healthcheck:
@@ -77,6 +77,26 @@ services:
       - "traefik.http.services.n8n.loadbalancer.server.port=5678"
     volumes:
       - ../files/nginx-n8n.conf:/etc/nginx/nginx.conf
+
+  mcp:
+    build:
+      context: .
+      dockerfile: .kodan/config/mcp/Dockerfile
+    restart: unless-stopped
+    networks:
+      - khoj_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mcp.rule=Host(`mcp.kodan.space`)"
+      - "traefik.http.routers.mcp.entrypoints=websecure"
+      - "traefik.http.routers.mcp.tls.certresolver=myresolver"
+      - "traefik.http.services.mcp.loadbalancer.server.port=65432"
+    environment:
+      - TASKMASTER_PROJECT_ROOT=/app
+    volumes:
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./taskmaster_project.json:/app/taskmaster_project.json
+      - ./.taskmaster:/app/.taskmaster
 
 networks:
   khoj_network:
