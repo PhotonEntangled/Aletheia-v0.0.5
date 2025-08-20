@@ -2,9 +2,9 @@ services:
   database:
     image: docker.io/pgvector/pgvector:pg15
     environment:
-      POSTGRAM_USER: postgres
-      POSTGRAM_PASSWORD: postgres
-      POSTGRAM_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     volumes:
       - khoj_db:/var/lib/postgresql/data/
     healthcheck:
@@ -81,7 +81,7 @@ services:
   mcp:
     build:
       context: .
-      dockerfile: .kodan/config/mcp/Dockerfile
+      dockerfile: mcp.Dockerfile
     restart: unless-stopped
     networks:
       - khoj_network
