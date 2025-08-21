@@ -1,6 +1,5 @@
 ---
-description: 
-globs: 
+description: Helpful for creating and using shared utility functions for logging, file I/O, configuration, data migration, and task manipulation.
 alwaysApply: false
 ---
 # Utility Function Guidelines

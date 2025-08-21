@@ -137,3 +137,30 @@ Based on [Khoj](https://github.com/khoj-ai/khoj) - AGPL-3.0 License
 ---
 
 **ALETHEIA** - Your AI-powered knowledge navigation system 🧠✨
+
+---
+
+## 📋 Core Features & Capabilities
+
+### **💬 Chat & Research**
+- **Full-featured Web Chat**: Main interface at `kodan.space` with conversation management, message history, and streaming responses.
+- **Telegram Integration**: Real-time chat via an integrated Telegram Bot.
+- **Online Search**: Integration with SearXNG for web research.
+- **Document & Knowledge Search**: Vector-based search across uploaded documents (PDF, text, markdown) and your knowledge base.
+- **Citation Support**: Provides references and source links for retrieved information.
+
+### **🎭 AI Agents & Models**
+- **Multi-LLM Support**: Chat with a wide range of local and online models (Llama 3, GPT, Claude, Gemini, etc.).
+- **Custom Agents**: Create specialized AI agents with unique personalities, tools, and knowledge bases.
+- **Image Generation**: Generate images directly from your chat.
+- **Code Analysis**: Process and understand code files.
+
+### **🔄 Automation & Integration**
+- **n8n Workflow Automation**: Integrated with the n8n platform for powerful automation.
+- **API Access**: REST API for external access and integrations.
+- **Code Execution Sandbox**: Uses Terrarium for safe code execution.
+
+### **🔧 Developer & Deployment**
+- **MCP Support**: Built-in Model Context Protocol integration.
+- **Docker Deployment**: Fully containerized for easy and consistent deployment.
+- **Self-Hosted**: Provides complete control over your data and infrastructure.

@@ -1,7 +1,6 @@
 ---
-description: Git workflow integrated with Task Master for feature development and collaboration
-globs: "**/*"
-alwaysApply: true
+description: Git workflow integrated with TThis rule is helpful for managing a task-driven development process using a Git feature branch workflow that is integrated with Task Master.ask Master for feature development and collaboration
+alwaysApply: false
 ---
 # Git Workflow with Task Master Integration
 
