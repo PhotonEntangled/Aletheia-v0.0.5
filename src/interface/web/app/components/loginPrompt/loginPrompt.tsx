@@ -289,8 +289,16 @@ function EmailSignInContext({
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <div className="flex items-center space-x-2 w-[300px] mx-auto">
-                        <input type="checkbox" id="remember-me" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
-                        <label htmlFor="remember-me" className="text-sm text-muted-foreground">Remember me</label>
+                        <input
+                            type="checkbox"
+                            id="remember-me"
+                            checked={rememberMe}
+                            onChange={(e) => setRememberMe(e.target.checked)}
+                            className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                        />
+                        <label htmlFor="remember-me" className="text-sm text-muted-foreground">
+                            Remember me
+                        </label>
                     </div>
                     <Button
                         variant="default"
@@ -446,9 +454,7 @@ function MainSignInContext({
             )}
             <div className="flex flex-col gap-4 text-center p-2">
                 <AletheiaLogo className="w-20 h-20 mx-auto mb-2" />
-                <div className="text-center font-bold text-xl">
-                    Welcome to Aletheia
-                </div>
+                <div className="text-center font-bold text-xl">Welcome to Aletheia</div>
                 <div className="text-center text-muted-foreground text-sm">
                     Sign in to access your knowledge assistant
                 </div>

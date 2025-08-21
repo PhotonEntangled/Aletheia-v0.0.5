@@ -10,10 +10,10 @@ export const metadata: Metadata = {
     description:
         "Aletheia is a personal knowledge assistant. It helps you understand better and create faster.",
     icons: {
-        icon: "/static/favicon.ico",
-        apple: "/static/Aletheia_logo.svg",
+        icon: "/favicon.ico",
+        apple: "/Aletheia_logo.svg",
     },
-    manifest: "/static/aletheia.webmanifest",
+    manifest: "/aletheia.webmanifest",
     keywords:
         "knowledge assistant, productivity, AI, Aletheia, open source, model agnostic, research, productivity tool, personal assistant, personal knowledge assistant, personal productivity assistant",
     openGraph: {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         type: "website",
         images: [
             {
-                url: "/static/Aletheia_logo.svg",
+                url: "/Aletheia_logo.svg",
                 width: 256,
                 height: 256,
             },
