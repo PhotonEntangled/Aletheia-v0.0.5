@@ -1,7 +1,6 @@
 ---
-description: 
-globs: 
-alwaysApply: true
+description: This rule is helpful for setting up testing frameworks, implementing a TDD workflow, writing unit, integration, and E2E tests, and ensuring code coverage.
+alwaysApply: false
 ---
 # Test Workflow & Development Process
 

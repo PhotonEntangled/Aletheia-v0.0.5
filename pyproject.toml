@@ -3,7 +3,7 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "khoj"
+name = "aletheia"
 description = "Your Second Brain"
 readme = "README.md"
 license = "AGPL-3.0-or-later"

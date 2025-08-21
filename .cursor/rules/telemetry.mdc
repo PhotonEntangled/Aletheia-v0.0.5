@@ -1,9 +1,7 @@
 ---
-description: Guidelines for integrating AI usage telemetry across Task Master.
-globs: scripts/modules/**/*.js,mcp-server/src/**/*.js
-alwaysApply: true
+description: This rule is helpful for capturing and propagating AI usage telemetry (like cost and token counts) throughout the application for both CLI and MCP server interactions.
+alwaysApply: false
 ---
-
 # AI Usage Telemetry Integration
 
 This document outlines the standard pattern for capturing, propagating, and handling AI usage telemetry data (cost, tokens, model, etc.) across the Task Master stack. This ensures consistent telemetry for both CLI and MCP interactions.

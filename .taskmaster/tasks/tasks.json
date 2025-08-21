@@ -27,7 +27,7 @@
         "id": 3,
         "title": "Enhance Telegram Bot with Task Management",
         "description": "Add Task Master capabilities to KODAN Telegram bot for remote task management",
-        "status": "pending",
+        "status": "deferred",
         "priority": "medium",
         "dependencies": [
           1
@@ -39,7 +39,7 @@
         "id": 4,
         "title": "Deploy MCP Server to VPS",
         "description": "Set up Task Master MCP server on Hostinger VPS for always-available access",
-        "status": "pending",
+        "status": "done",
         "priority": "low",
         "dependencies": [
           1
@@ -51,7 +51,7 @@
         "id": 5,
         "title": "Configure Development Workflow",
         "description": "Set up task-driven development workflow using Task Master",
-        "status": "in-progress",
+        "status": "done",
         "priority": "high",
         "dependencies": [
           1
@@ -121,7 +121,7 @@
         "description": "Define strategic direction for KODAN development",
         "details": "Outline future features, integration plans, UI enhancements, and development priorities",
         "testStrategy": "",
-        "status": "pending",
+        "status": "in-progress",
         "dependencies": [],
         "priority": "high",
         "subtasks": []
@@ -129,13 +129,59 @@
       {
         "id": 12,
         "title": "Enhanced Telegram Integration",
-        "description": "Add advanced features to Telegram bot",
-        "details": "Implement slash commands, conversation selection, research tools, agent access, and file handling",
-        "testStrategy": "",
-        "status": "pending",
+        "description": "Enhance the Telegram bot's functionality based on the feature audit. This includes implementing slash commands (e.g., /research, /agent), allowing users to select a conversation thread, enabling file uploads, and allowing users to switch between AI agents directly within the chat.",
+        "status": "deferred",
         "dependencies": [],
-        "priority": "medium",
-        "subtasks": []
+        "priority": "low",
+        "details": "Based on a feature audit, the following enhancements are required:\n1.  **Slash Commands:** Implement a robust handler for slash commands, including `/research` to activate research tools and `/agent` to manage AI agents.\n2.  **Conversation Selection:** Allow users to list, select, and switch between different conversation threads.\n3.  **File Uploads:** Enable the bot to receive and process file uploads from users.\n4.  **Agent Switching:** Provide a mechanism for users to switch the active AI agent directly within a chat session.",
+        "testStrategy": "1.  Verify that all new slash commands (`/research`, `/agent`) are recognized and trigger the correct actions.\n2.  Test the conversation selection flow: ensure users can list their conversations and successfully switch to a different one.\n3.  Test file uploads with various file types to ensure they are received and handled correctly.\n4.  Confirm that switching AI agents via the `/agent` command changes the active model for subsequent messages in the chat.",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "",
+            "description": "Implement a slash command handler framework for the Telegram bot.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "",
+            "description": "Implement the `/research` command to integrate with research tools.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "",
+            "description": "Implement the `/agent` command to allow users to list and switch AI agents.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "",
+            "description": "Develop the conversation thread selection and management feature.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "",
+            "description": "Add functionality to handle and process file uploads from users.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          }
+        ]
       },
       {
         "id": 13,
@@ -159,7 +205,7 @@
         "description": "Diagnose and resolve the issue causing Aletheia brand logos to fail to load on the live server. This bug results in 404 errors for SVG assets and negatively impacts the user interface's branding.",
         "details": "The primary goal is to identify why SVG logo assets are not being served correctly on the live environment. Start by using browser developer tools to inspect the network requests and confirm the exact paths that are returning 404 errors. Investigate the Next.js application's static file handling; verify that the logo assets are located in the `/public` directory. Review the application code to ensure the image source paths are correctly referenced (e.g., `/logo.svg`). Pay close attention to the `Dockerfile` to ensure the `public` directory is being correctly copied into the production image during the build process. A missing or incorrect `COPY ./public ./public` instruction is a likely culprit.",
         "testStrategy": "1. After deploying the fix, perform a hard refresh (clearing cache) on the web application in a browser. 2. Visually confirm that the Aletheia logos now appear correctly in all expected locations in the UI. 3. Open the browser's developer tools, go to the 'Network' tab, and reload the page. 4. Filter the network requests for `.svg` files and verify that the logo assets now load with a `200 OK` status code. 5. Confirm that no 404 errors related to image or brand assets are present in the console or network log.",
-        "status": "pending",
+        "status": "done",
         "dependencies": [
           4
         ],
@@ -172,7 +218,7 @@
         "description": "The server logs show the user is being immediately rate-limited ('429 Too Many Requests') when attempting to log in via email. This task is to correct the configuration to allow for a reasonable number of login attempts.",
         "details": "Investigate the rate-limiting logic in `src/khoj/routers/helpers.py` and `src/khoj/routers/auth.py`. The current implementation incorrectly triggers a '429 Too Many Requests' error on the first login attempt. Analyze the rate-limiter's configuration (e.g., token bucket size, refill rate) and the key used to identify clients. Adjust the parameters to permit a reasonable number of login attempts (e.g., 5-10 attempts per minute) before enforcement. Ensure the rate-limiting is applied on a per-user or per-IP basis, not globally.",
         "testStrategy": "1. Before applying the fix, write a test that replicates the bug: an initial login attempt should fail with a 429 status code. 2. After applying the fix, confirm the initial test now passes, allowing a successful login. 3. Write a new test to verify that multiple failed login attempts (e.g., with a wrong password) up to the new limit return a standard authentication error, not a 429. 4. Write a final test to confirm that exceeding the configured limit of failed attempts correctly triggers the '429 Too Many Requests' error. 5. Monitor server logs during testing to ensure the rate-limiter behaves as expected.",
-        "status": "pending",
+        "status": "done",
         "dependencies": [
           9
         ],
@@ -182,16 +228,62 @@
       {
         "id": 16,
         "title": "Resume Obsidian Integration",
-        "description": "Guide the user through the final steps of connecting their Obsidian vault to the Aletheia server, enabling seamless content synchronization and search.",
-        "details": "With the UI and login functionalities restored (Tasks 14 & 15), this task is to complete the Obsidian integration. First, verify that the Aletheia server's Obsidian API endpoint is active and accessible post-bug fixes. Create a clear, step-by-step guide or a UI wizard that walks the user through: 1. Entering their server URL and credentials into the Obsidian plugin settings. 2. Authenticating their account (leveraging the now-fixed email login). 3. Selecting their vault and initiating the first-time synchronization. Ensure robust error handling is in place to provide informative feedback if the connection fails at any step (e.g., incorrect URL, authentication failure, network issues).",
-        "testStrategy": "1. Manually verify that a user can successfully log in via the email method (confirming Task 15 fix). 2. Confirm that all UI elements, especially branding and logos, load correctly (confirming Task 14 fix). 3. Follow the newly created user guide/wizard to attempt a connection from a fresh Obsidian vault. 4. Check for a success message in the UI upon successful connection. 5. On the server-side, check the logs to confirm a successful authentication and handshake with the Obsidian client. 6. As a final verification, create a new note in the connected Obsidian vault and confirm that it becomes searchable/accessible through the Aletheia server interface.",
-        "status": "pending",
+        "description": "Begin developing the 'second brain' Obsidian vault. This involves actively using the existing integration to research and document best practices for organizing knowledge, leveraging the vector database, and refining the RAG process.",
+        "status": "in-progress",
         "dependencies": [
           14,
           15
         ],
         "priority": "medium",
-        "subtasks": []
+        "details": "Now that the Obsidian integration is functional, the focus shifts to actively building out the knowledge base. This task involves using the connected Obsidian vault as a 'second brain' for the Aletheia project. Key activities include: 1. Researching and documenting best practices for knowledge organization systems (like Zettelkasten or PARA) suitable for our project. 2. Populating the vault with high-quality, structured notes on topics relevant to Aletheia's development, including AI research, vector databases, and RAG optimization techniques. 3. Actively using the system to test how new content is indexed and retrieved. 4. Refining the RAG process based on the performance with the new, structured content in the vault.",
+        "testStrategy": "1. Add a new, detailed note about a specific technical topic (e.g., 'LoRA fine-tuning') to the Obsidian vault. 2. Verify that the new note is successfully synchronized and indexed by the Aletheia server's vector database. 3. Formulate a question that can only be answered by the content of the new note and submit it to the system. 4. Evaluate the RAG output for accuracy, relevance, and proper citation of the source note. 5. Periodically review the structure of the Obsidian vault to ensure it adheres to the established organizational best practices. 6. Assess the overall improvement in query responses as the knowledge base grows.",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "",
+            "description": "Research and collate articles/resources on 'second brain' methodologies (e.g., Zettelkasten, PARA).",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "",
+            "description": "Document a standardized note-taking and linking strategy for the Aletheia project within the Obsidian vault.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "",
+            "description": "Populate the vault with initial content related to AI development, RAG techniques, and project management best practices.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "",
+            "description": "Test and refine the RAG process by querying the system with questions based on the newly added Obsidian content.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "",
+            "description": "Create a feedback loop document within Obsidian to track query performance and areas for RAG improvement.",
+            "status": "pending",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          }
+        ]
       },
       {
         "id": 17,
@@ -201,7 +293,7 @@
         "testStrategy": "Successfully locate the logo and webmanifest files inside the running Docker container at the expected static root path using the `ls` command. File permissions should be at least `644` (readable by all).",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -214,7 +306,7 @@
         "dependencies": [
           17
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -225,7 +317,7 @@
         "testStrategy": "Produce a list of all files and line numbers containing references to the logo files without the correct `/static/` prefix.",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -239,7 +331,7 @@
           18,
           19
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -253,7 +345,7 @@
           18,
           19
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -267,7 +359,7 @@
           20,
           21
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -280,7 +372,7 @@
         "dependencies": [
           22
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -293,13 +385,118 @@
         "dependencies": [
           23
         ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 25,
+        "title": "Fix Traefik 'Bad Gateway' Error with Correct Docker Labels",
+        "description": "Fix the Traefik 'Bad Gateway' error by adding missing router and SSL configuration labels to the server and n8n services in the docker-compose.production.yml file.",
+        "details": "The `server` and `n8n` services are currently inaccessible, resulting in a \"Bad Gateway\" error because they lack the necessary Traefik labels for routing and SSL termination. This task involves updating the `docker-compose.production.yml` file to include these labels, using the working configuration from the original `khoj-ai/khoj` repository as a reference.\n\n**Implementation Steps:**\n1.  **Inspect `docker-compose.production.yml`**: Identify the `server` and `n8n` service definitions.\n2.  **Add Traefik Labels to `server` service**: Under the `labels` key for the `server` service, add the following:\n    - `traefik.enable=true`\n    - `traefik.http.routers.server.rule=Host('kodan.space')`\n    - `traefik.http.routers.server.entrypoints=websecure`\n    - `traefik.http.routers.server.tls.certresolver=myresolver`\n3.  **Add Traefik Labels to `n8n` service**: Under the `labels` key for the `n8n` service, add the following:\n    - `traefik.enable=true`\n    - `traefik.http.routers.n8n.rule=Host('n8n.kodan.space')`\n    - `traefik.http.routers.n8n.entrypoints=websecure`\n    - `traefik.http.routers.n8n.tls.certresolver=myresolver`\n4.  **Redeploy Services**: After saving the changes, run `docker-compose -f docker-compose.production.yml up -d` to apply the new configuration.",
+        "testStrategy": "1.  **Deploy Changes**: Apply the updated `docker-compose.production.yml` to the production environment.\n2.  **Verify Server Access**: Navigate to `https://kodan.space` in a web browser. The application should load successfully without any \"Bad Gateway\" errors.\n3.  **Verify n8n Access**: Navigate to `https://n8n.kodan.space`. The n8n interface should load correctly.\n4.  **Check SSL Certificates**: Use browser developer tools to inspect the SSL certificate for both domains. Verify they are valid and issued by the correct authority (e.g., Let's Encrypt).\n5.  **Monitor Logs**: Check the Traefik container logs to ensure there are no errors related to certificate generation or routing for the `server` and `n8n` services.",
+        "status": "done",
+        "dependencies": [
+          4,
+          7
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 26,
+        "title": "Containerize and Deploy Taskmaster MCP Server",
+        "description": "Create a Dockerfile for the Taskmaster MCP server and add it as a new service to the `docker-compose.production.yml` file. This task will configure the server to run persistently on the VPS, providing a stable endpoint for the VS Code Kanban extension and other integrations.",
+        "details": "1. **Create Dockerfile**: In the root directory of the Taskmaster MCP server, create a new file named `Dockerfile`.\n   - Use an appropriate Python base image (e.g., `python:3.10-slim`).\n   - Set a working directory (e.g., `WORKDIR /app`).\n   - Copy the `requirements.txt` file and install dependencies using `pip install --no-cache-dir -r requirements.txt`.\n   - Copy the rest of the server source code into the image.\n   - Expose the port the server runs on.\n   - Define the `CMD` to run the server.\n2. **Update Docker Compose**: Edit the `docker-compose.production.yml` file to include a new service for the MCP server.\n   - Define a service named `taskmaster-mcp`.\n   - Use the `build` instruction to point to the directory containing the new Dockerfile.\n   - Map the container's exposed port to a host port (e.g., `ports: [\"8001:8000\"]`).\n   - Set the restart policy to `unless-stopped` to ensure it runs persistently.\n3. **Deploy**: SSH into the VPS, pull the latest changes, and run `docker-compose -f docker-compose.production.yml up -d --build taskmaster-mcp` to build and start the new service.",
+        "testStrategy": "1. **Verify Container Status**: After deployment, run `docker ps` on the VPS and confirm that the `taskmaster-mcp` container is running and has a status of 'Up'.\n2. **Inspect Logs**: Check the container's logs for any startup errors by running `docker logs <container_id_or_name>`. The logs should indicate that the server has started successfully.\n3. **Test Endpoint Connectivity**: Use a tool like `curl` to test the connection to the mapped host port (e.g., `curl http://<vps_ip>:8001/health`).\n4. **Client Integration Test**: Configure the VS Code Kanban extension to use the new server endpoint. Verify that the extension can successfully connect, fetch, and update tasks.",
+        "status": "deferred",
+        "dependencies": [
+          1,
+          4
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 27,
+        "title": "Consolidate Development Logs into Changeset Workflow",
+        "description": "Deprecate and remove redundant markdown devlog files. Establish the 'changeset' command, combined with Git history, as the single source of truth for tracking development progress and creating changelogs.",
+        "details": "",
+        "testStrategy": "",
+        "status": "in-progress",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 28,
+        "title": "Develop an Intuitive n8n Management UI",
+        "description": "Design and implement a user interface within the Aletheia web app to manage and visualize n8n workflows, as outlined in the project roadmap (RDM-005).",
+        "details": "",
+        "testStrategy": "",
         "status": "pending",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 29,
+        "title": "Create a Browser Extension for Web RAG",
+        "description": "Develop a Chrome browser extension for RAG capabilities on any webpage, allowing for summarization, analysis, and interaction with web content (RDM-006).",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "low",
+        "subtasks": []
+      },
+      {
+        "id": 30,
+        "title": "Implement 'Visible Thinking Process' in UI",
+        "description": "Implement a UI element that displays the AI's thought process (e.g., retrieved context, tool usage) before delivering the final response, to increase transparency (RDM-001).",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 31,
+        "title": "Create 'The Opinion Bank' Feature",
+        "description": "Create a dedicated feature for users to log, track, and analyze their opinions on any topic, serving as a powerful self-improvement tool (RDM-014).",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 32,
+        "title": "Investigate and Implement Mobile Version of Aletheia",
+        "description": "Research the existing mobile version of Aletheia (formerly Khoj). Determine if it's a native app, a PWA, or a responsive web design. Implement and test it to provide mobile access, prioritizing this over the enhanced Telegram integration.",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 33,
+        "title": "General UI/UX Overhaul for Aletheia",
+        "description": "Perform a general overhaul of the Aletheia UI/UX. This includes implementing a visual context window indicator (e.g., a circle that fills up) to show users their current context usage, and other enhancements to improve user interaction and experience.",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "high",
         "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-08-15T11:57:48.051Z",
-      "updated": "2025-08-18T19:16:52.004Z",
+      "updated": "2025-08-21T07:24:04.085Z",
       "description": "Tasks for master context"
     }
   }
