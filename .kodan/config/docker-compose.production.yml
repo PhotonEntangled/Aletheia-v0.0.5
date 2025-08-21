@@ -14,7 +14,7 @@ services:
       retries: 5
     restart: unless-stopped
     networks:
-      - kodan_network
+      - khoj_network
 
   sandbox:
     image: ghcr.io/khoj-ai/terrarium:latest
@@ -25,7 +25,7 @@ services:
       retries: 2
     restart: unless-stopped
     networks:
-      - kodan_network
+      - khoj_network
 
   search:
     image: docker.io/searxng/searxng:latest
@@ -35,7 +35,7 @@ services:
       - SEARXNG_BASE_URL=http://localhost:8080/
     restart: unless-stopped
     networks:
-      - kodan_network
+      - khoj_network
 
   server:
     depends_on:
@@ -72,9 +72,10 @@ services:
       - KHOJ_SEARXNG_URL=http://search:8080
       - RESEND_API_KEY=re_ds7u99gf_H6BqMbvHC4pz7HpwjS8hGbNV
       - RESEND_EMAIL=noreply@kodan.space
+    command: --host="0.0.0.0" --port=42110 -vv --non-interactive
     restart: unless-stopped
     networks:
-      - kodan_network
+      - khoj_network
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.server.loadbalancer.server.port=42110"
@@ -85,15 +86,31 @@ services:
     expose:
       - "5678"
     networks:
-      - kodan_network
+      - khoj_network
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.n8n.loadbalancer.server.port=5678"
     volumes:
       - ../files/nginx-n8n.conf:/etc/nginx/nginx.conf
 
+  mcp:
+    image: ghcr.io/photonentangled/aletheia-mcp:0.0.1
+    restart: unless-stopped
+    networks:
+      - khoj_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.mcp.loadbalancer.server.port=65432"
+    environment:
+      - TASKMASTER_PROJECT_ROOT=/app
+      - OPENROUTER_API_KEY=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
+    volumes:
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./taskmaster_project.json:/app/taskmaster_project.json
+      - ./.taskmaster:/app/.taskmaster
+
 networks:
-  kodan_network:
+  khoj_network:
     driver: bridge
 
 volumes:
