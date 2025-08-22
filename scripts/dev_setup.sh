@@ -34,7 +34,18 @@ if [ "$DEVCONTAINER" = true ]; then
     echo "Setup Web App with Bun. Use pre-installed dependencies in /opt/khoj_web."
     cd "$PROJECT_ROOT/src/interface/web"
     ln -sf /opt/khoj_web/node_modules node_modules
-    bun install && bun run ciexport
+    
+    # Try to build and export, but don't fail if it doesn't work
+    echo "Attempting to build web app..."
+    if bun install && bun run build; then
+        echo "Web app build successful, copying files..."
+        cp -r out/ ../../khoj/interface/built || echo "Warning: Failed to copy built files"
+        bun run cicollectstatic || echo "Warning: Failed to collect static files"
+    else
+        echo "Warning: Web app build failed, creating minimal built directory..."
+        mkdir -p ../../khoj/interface/built
+        echo "Web app build will be completed later"
+    fi
 else
     # Standard setup
     echo "Installing Server App..."
