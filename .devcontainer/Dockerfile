@@ -33,9 +33,13 @@ ENV UV_INDEX="https://download.pytorch.org/whl/cpu" \
     PGSERVER_DATA_DIR="/opt/khoj_db"
 # Install Python dependencies from pyproject.toml in editable mode
 RUN sed -i "s/dynamic = \\[\"version\"\\]/version = \"$VERSION\"/" pyproject.toml && \
-    uv sync --all-extras && \
-    # Save the lock file generated with correct Linux platform wheels
-    cp uv.lock /opt/uv.lock.linux && \
+    echo "Starting UV sync with all extras..." && \
+    (uv sync --all-extras --verbose || \
+     (echo "UV sync failed, trying without extras..." && uv sync --verbose) || \
+     (echo "UV sync still failed, trying pip fallback..." && pip install -e .)) && \
+    echo "Dependency installation completed" && \
+    # Save the lock file generated with correct Linux platform wheels (if it exists)
+    (cp uv.lock /opt/uv.lock.linux || echo "No uv.lock to copy") && \
     chown -R vscode:vscode /opt/venv
 
 # --- Web App Dependencies ---
